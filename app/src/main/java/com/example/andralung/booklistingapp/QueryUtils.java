@@ -57,7 +57,7 @@ public final class QueryUtils {
                 books.add(selectedBook);
             }
         } catch (JSONException e) {
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the results", e);
         }
         return books;
     }

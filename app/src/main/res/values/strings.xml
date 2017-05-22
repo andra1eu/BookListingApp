@@ -4,4 +4,5 @@
     <string name="activity_main_search_view_hint">Enter book details</string>
     <string name="activity_main_search_text_error">We can\'t search for empty or malformed text</string>
     <string name="activity_main_server_error">Error !!!</string>
+    <string name="activity_main_no_connetion">You don\'t have internet connection.</string>
 </resources>

@@ -1,7 +1,11 @@
 package com.example.andralung.booklistingapp;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listViewBook.setAdapter(adapter);
 
         searchView.addTextChangedListener(this);
+
     }
 
     @Override
@@ -84,13 +89,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        if (search.isEmpty() || url == null) {
-            searchLayout.setError(getString(R.string.activity_main_search_text_error));
+        if (search.isEmpty() || url == null || !isOnline()) {
+            searchLayout.setError(getString(!isOnline() ? R.string.activity_main_no_connetion :
+                    R.string.activity_main_search_text_error));
             adapter.clear();
             imageView.setImageResource(R.drawable.book_coffee);
             return;
         }
 
+        afterTextChanged(null);
 
         Log.d(TAG, url.toString() + "");
         GoogleBookApiTask task = new GoogleBookApiTask();
@@ -182,5 +189,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void afterTextChanged(Editable s) {
         if (adapter != null) adapter.clear();
         imageView.setImageDrawable(new ColorDrawable(ContextCompat.getColor(MainActivity.this, R.color.colorBackground)));
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }
