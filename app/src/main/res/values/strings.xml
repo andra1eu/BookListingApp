@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BookListingApp</string>
+    <string name="activity_main_search_button">Search</string>
+    <string name="activity_main_search_view_hint">Enter book details</string>
+    <string name="activity_main_search_text_error">We can\'t search for empty or malformed text</string>
+    <string name="activity_main_server_error">Error !!!</string>
+</resources>
